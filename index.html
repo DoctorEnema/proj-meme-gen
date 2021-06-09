@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme</title>
+    <link rel="shortcut icon" href="smiley.svg" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav>
+        <div class="logo">Yuumemes</div>
+        <ul class="nav-links clean-list">
+            <li class="gallery-link navies active" onclick="displayPage(this)">Gallery</li>
+            <li class="generator navies" onclick="displayPage(this)">Generator</li>
+            <li class="about navies" onclick="displayPage(this)">About</li>
+        </ul>
+    </nav>
+
+    <div class="main-gallery">
+        <div class="search-section">
+            <div class="search-inputs">
+                <input type="search" name="SEARCH" placeholder="Search Memes">
+                <button class="btn-search">Search!</button>
+            </div>
+            <div class="search-tags">
+                <div class="tag1">Funny</div>
+                <div class="tag2">Cats</div>
+                <div class="tag3">The Dog</div>
+            </div>
+        </div>
+
+        <div class="gallery">
+            <img src="meme-imgs (square)/1.jpg">
+            <img src="meme-imgs (square)/2.jpg">
+            <img src="meme-imgs (square)/3.jpg">
+            <img src="meme-imgs (square)/4.jpg">
+            <img src="meme-imgs (square)/5.jpg">
+            <img src="meme-imgs (square)/6.jpg">
+            <img src="meme-imgs (square)/7.jpg">
+            <img src="meme-imgs (square)/8.jpg">
+        </div>
+    </div>
+
+    <div class="main-generator hide">
+        <div class="canvas-holder">
+            <canvas width="300" height="300"></canvas>
+        </div>
+
+        <div class="generator-controls">
+            <!-- <input type="text" name="wow" onkeyup="testing()" placeholder="Top text">
+            <div class="testing">wow</div>
+            <button onclick="testing2()"> wow</button> -->
+            <div class="text-position">
+                <input class="meme-text" type="text" name="MEME-TEXT" placeholder="Top text">
+                <div class="text-position-btns">
+                    <button><img src="img/icons/add.png"></button>
+                    <button><img src="img/icons/remove.png"></button>
+                    <button><img src="img/icons/upAndDown.png"></button>
+                </div>
+            </div>
+            <div class="text-styling">
+                <button><img src="img/icons/IncreaseFont.png"></button>
+                <button><img src="img/icons/decreaseFont.png"></button>
+                <button><img src="img/icons/alignLeft.png"></button>
+                <button><img src="img/icons/textCenter.png"></button>
+                <button><img src="img/icons/alignRight.png"></button>
+                <button><img src="img/icons/textStroke.png"></button>
+                <button><img src="img/icons/colorPicker.png"></button>
+            </div>
+            <div class="stickers">
+                <img src="meme-imgs (square)/10.jpg">
+                <img src="meme-imgs (square)/12.jpg">
+                <img src="meme-imgs (square)/13.jpg">
+                <img src="meme-imgs (square)/14.jpg">
+                <img src="meme-imgs (square)/15.jpg">
+                <img src="meme-imgs (square)/16.jpg">
+            </div>
+            <div class="social">
+                <button>Download</button>
+                <button><img src="img/icons/facebook-logo.png"></button>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

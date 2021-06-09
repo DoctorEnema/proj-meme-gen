@@ -1,0 +1,165 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: #546bf3;
+    align-items: center;
+    color: #d4ddf7;
+    font-weight: 600;
+    /* text-shadow: 0px 0px 3px #fdfd90; ; */
+}
+
+.clean-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links ul {
+    padding-inline-end: 2rem;
+}
+
+ul:first-of-type {
+    border-inline-end: 1px solid black;
+}
+
+.nav-links li {
+    padding: 2rem;
+    border-inline-start: 1px solid black;
+}
+
+.nav-links li:hover {
+    cursor: pointer;
+    color: #f3c942
+}
+
+.logo {
+    font-size: 2rem;
+}
+
+.active {
+    box-shadow: inset 0px -6px 0px 0px #f3c942;
+}
+
+
+
+
+
+
+.search-section {
+    display: flex;
+    padding: 2rem 0;
+    /* justify-content: space-between; */
+}
+
+.search-inputs {
+    align-self: center;
+}
+
+.search-tags {
+    display: flex;
+    flex-wrap: wrap;
+    padding-inline-end: 1rem;
+}
+
+.search-tags>* {
+    padding-inline-start: 1rem;
+}
+
+.gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.main-generator {
+    display: flex;
+    background-color: whitesmoke;
+    justify-content: space-between;
+    padding: 0.5rem;
+    overflow-x: hidden;
+    gap: 0.5rem;
+}
+
+.canvas-holder {
+    display: block;
+    background-color: wheat;
+    flex: 1;
+}
+
+.generator-controls {
+    width: 400px;
+    padding-bottom:3rem
+}
+
+.generator-controls button{
+    background-color:#546bf3 ;
+    color:#b4c5f5 ;
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.generator-controls button:hover{
+    cursor: pointer;
+}
+
+.generator-controls button img{
+    width: 40px;
+    height: 100%;
+}
+
+.meme-text {
+    margin: 1rem 0 0.5rem;
+    width: 100%;
+    height: 2rem;
+    font-size: 1.6rem;
+}
+
+.text-position-btns{
+    padding: .25rem;
+}
+
+.text-styling{
+    padding: .25rem;
+}
+.text-styling>*{
+    margin: .5rem 0;
+}
+
+.stickers img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.stickers {
+    width: 100%;
+    display: flex;
+    overflow-x: scroll;
+    padding: .25rem;
+}
+
+.social{
+    padding: .25rem;
+}
+
+.hide{
+    display: none;
+}
