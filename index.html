@@ -10,17 +10,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-    <nav>
-        <div class="logo">Yuumemes</div>
-        <ul class="nav-links clean-list">
-            <li class="gallery-link navies active" onclick="displayPage(this)">Gallery</li>
-            <li class="generator navies" onclick="displayPage(this)">Generator</li>
-            <li class="about navies" onclick="displayPage(this)">About</li>
-        </ul>
-    </nav>
-
-    <div class="main-gallery">
+<body onload="init()">
+    <div class="main-nav">
+        <nav class="main-layout">
+            <div class="logo">Yuumemes</div>
+            <ul class="nav-links clean-list">
+                <li class="gallery-link navies active" onclick="displayPage(this)">Gallery</li>
+                <li class="generator navies" onclick="displayPage(this)">Generator</li>
+                <li class="about navies" onclick="displayPage(this)">About</li>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-gallery main-layout">
         <div class="search-section">
             <div class="search-inputs">
                 <input type="search" name="SEARCH" placeholder="Search Memes">
@@ -33,21 +34,14 @@
             </div>
         </div>
 
-        <div class="gallery">
-            <img src="meme-imgs (square)/1.jpg">
-            <img src="meme-imgs (square)/2.jpg">
-            <img src="meme-imgs (square)/3.jpg">
-            <img src="meme-imgs (square)/4.jpg">
-            <img src="meme-imgs (square)/5.jpg">
-            <img src="meme-imgs (square)/6.jpg">
-            <img src="meme-imgs (square)/7.jpg">
-            <img src="meme-imgs (square)/8.jpg">
+        <div class="gallery main-layout">
+
         </div>
     </div>
 
-    <div class="main-generator hide">
-        <div class="canvas-holder">
-            <canvas width="300" height="300"></canvas>
+    <div class="main-generator main-layout">
+        <div class="canvas-container">
+            <canvas></canvas>
         </div>
 
         <div class="generator-controls">
@@ -55,7 +49,7 @@
             <div class="testing">wow</div>
             <button onclick="testing2()"> wow</button> -->
             <div class="text-position">
-                <input class="meme-text" type="text" name="MEME-TEXT" placeholder="Top text">
+                <input class="meme-text" type="text" name="MEME-TEXT" placeholder="Top text" onkeydown="rememberText()" onkeyup="drawText()">
                 <div class="text-position-btns">
                     <button><img src="img/icons/add.png"></button>
                     <button><img src="img/icons/remove.png"></button>
@@ -80,7 +74,7 @@
                 <img src="meme-imgs (square)/16.jpg">
             </div>
             <div class="social">
-                <button>Download</button>
+                <a href="#" onclick="downloadCanvas(this)">Download</a>
                 <button><img src="img/icons/facebook-logo.png"></button>
             </div>
         </div>
@@ -91,8 +85,8 @@
     </div>
 
 
-
-
+    <script src="js/meme-service.js"></script>
+    <script src="js/canvas.js"></script>
     <script src="js/main.js"></script>
 </body>
 

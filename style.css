@@ -1,15 +1,26 @@
 * {
     box-sizing: border-box;
 }
-
 body {
     margin: 0;
+}
+
+
+.main-nav{
+    background-color: #546bf3;
+}
+
+
+.main-layout{
+    width: 980px;
+    margin: 0 auto;
+    
 }
 
 nav {
     display: flex;
     justify-content: space-between;
-    background-color: #546bf3;
+
     align-items: center;
     color: #d4ddf7;
     font-weight: 600;
@@ -98,7 +109,7 @@ ul:first-of-type {
     gap: 0.5rem;
 }
 
-.canvas-holder {
+.canvas-container {
     display: block;
     background-color: wheat;
     flex: 1;
