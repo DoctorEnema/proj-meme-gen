@@ -1,16 +1,5 @@
 'use strict'
 
-
-// function testing() {
-//     var theTest = document.querySelector('.testing')
-//     var text = document.querySelector('input[name=wow]')
-//     theTest.innerText = text.value
-// }
-
-// function testing2() {
-//     document.querySelector('input[name=wow]').placeholder = "wawawiwa"
-// }
-
 function displayPage(clicked) {
 
     document.querySelectorAll('.navies').forEach((el) => el.classList.remove('active'))
@@ -31,27 +20,7 @@ function displayPage(clicked) {
 
 function renderGallery() {
     var strHTML = ''
-    gImgs.forEach(img => strHTML += `<img src="${img.url}" onclick="chooseImage(this)">`)
+    gImgs.forEach(img => strHTML += `<img src="${img.url}" id=img-${img.id} onclick="chooseImage(this)">`)
     document.querySelector('.gallery').innerHTML = strHTML
 }
 
-
-    // function _createTodos() {
-    //     var todos = loadFromStorage(STORAGE_KEY)
-    //     if (!todos || !todos.length) {
-    //         todos = [_createTodo('Learn CSS'), _createTodo('Learn HTML'), _createTodo('Learn JS')]
-    //         saveToStorage(STORAGE_KEY, todos)
-    //     }
-    //     return todos;
-    // }
-
-    // function _createTodo(txt) {
-    //     var todo = {
-    //         id: _makeId(),
-    //         txt: txt,
-    //         time: _createdAtTimeStamp(),
-    //         priority: parseInt(_makePriority()),
-    //         isDone: false,
-    //     }
-    //     return todo;
-    // }
