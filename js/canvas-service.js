@@ -46,13 +46,52 @@ function drawText() {
     gCtx.drawImage(gCurrImg, 0, 0, gElCanvas.width, gElCanvas.height)
     gCtx.fillText(currLine.txt, currLine.posX, currLine.posY)
     gCtx.strokeText(currLine.txt, currLine.posX, currLine.posY)
+    if (currLine.align === 'right') {
+        drawRectRev(currLine.posX + currLine.size / 8, currLine.posY - currLine.size)
+    } else if (currLine.align === 'left') {
+        drawRect(currLine.posX - currLine.size / 8, currLine.posY - currLine.size)
+    } else drawLine(currLine.posX, currLine.posY + currLine.size / 4)
     drawAllText()
+
 }
 
-// function drawCanvas(){
-//     drawImg()
-//     drawAllText()
-// }
+function drawRectRev(x, y) {
+    var currLine = gMeme.lines[gMeme.selectedLineIdx]
+    var testing = gCtx.measureText(currLine.txt)
+    gCtx.beginPath()
+    gCtx.rect(x, y, testing.width * -1 - 15, gElCanvas.height / 8)
+    gCtx.strokeStyle = 'black'
+    gCtx.stroke()
+}
+function drawRect(x, y) {
+    var currLine = gMeme.lines[gMeme.selectedLineIdx]
+    var testing = gCtx.measureText(currLine.txt)
+    gCtx.beginPath()
+    gCtx.rect(x, y, testing.width + 15, gElCanvas.height / 8)
+    gCtx.strokeStyle = 'black'
+    gCtx.stroke()
+}
+
+function drawLine(x, y) {
+    var currLine = gMeme.lines[gMeme.selectedLineIdx]
+    var diff = y - (currLine.size + 15)
+    var textWidth = gCtx.measureText(currLine.txt).width
+    gCtx.beginPath()
+    gCtx.lineWidth = 2
+    gCtx.moveTo(x, y)
+    gCtx.lineTo(x - textWidth / 1.9, y)
+    gCtx.lineTo(x + textWidth / 1.9, y)
+    gCtx.lineTo(x + textWidth / 1.9, diff)
+    gCtx.lineTo(x - textWidth / 1.9, diff)
+    gCtx.lineTo(x - textWidth / 1.9, y)
+    gCtx.lineTo(x + textWidth / 1.9, y)
+    gCtx.strokeStyle = 'black'
+    gCtx.stroke()
+
+}
+
+
+
 
 function addLine() {
     var strHTML = ''
@@ -62,19 +101,33 @@ function addLine() {
     document.querySelector('.meme-texts').innerHTML += strHTML
     gMeme.selectedLineIdx = lastIdx
 
-    gMeme.lines.push({
-        txt: document.querySelector(`input[name=MEME-TEXT${lastIdx}]`).value,
-        size: 50,
-        align: 'left',
-        color: 'white',
-        strokeColor: 'black',
-        posX: gElCanvas.width * 0.2,
-        posY: gElCanvas.height / 2,
-    })
-
+    if (textPosition === 'Bottom Text') {
+        gMeme.lines.push({
+            txt: document.querySelector(`input[name=MEME-TEXT${lastIdx}]`).value,
+            size: 50,
+            align: 'center',
+            color: 'white',
+            strokeColor: 'black',
+            posX: gElCanvas.width / 2,
+            posY: gElCanvas.height / 1.1,
+        })
+    }
+    else {
+        gMeme.lines.push({
+            txt: document.querySelector(`input[name=MEME-TEXT${lastIdx}]`).value,
+            size: 50,
+            align: 'center',
+            color: 'white',
+            strokeColor: 'black',
+            posX: gElCanvas.width / 2,
+            posY: gElCanvas.height / 2,
+        })
+    }
     document.querySelectorAll('.meme-text').forEach((el) => el.classList.add('hide'))
     document.querySelector(`input[name=MEME-TEXT${lastIdx}]`).classList.remove('hide')
 }
+
+
 
 
 
@@ -87,6 +140,9 @@ function changeFontSize(diff) {
 function changeTextAlign(alignment) {
     var currMeme = gMeme.lines[gMeme.selectedLineIdx]
     currMeme.align = alignment
+    if (alignment === 'right') currMeme.posX = gElCanvas.width / 1.1
+    else if (alignment === 'left') currMeme.posX = gElCanvas.width / 9
+    else currMeme.posX = gElCanvas.width / 2
     drawText()
 }
 
@@ -107,11 +163,11 @@ function chooseImage(img) {
             {
                 txt: '',
                 size: 50,
-                align: 'left',
+                align: 'center',
                 color: 'white',
                 strokeColor: 'black',
-                posX: gElCanvas.height * 0.9,
-                posY: gElCanvas.width / 2,
+                posX: gElCanvas.width / 1.1,
+                posY: gElCanvas.height / 2,
             }
         ]
     }
@@ -120,7 +176,6 @@ function chooseImage(img) {
     drawImg(img.src)
     resizeCanvas(img)
     gCurrImg = img
-    // document.querySelector('input[name=MEME-TEXT]').value = ''
 }
 
 function resizeCanvas(img) {
