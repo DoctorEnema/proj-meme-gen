@@ -25,6 +25,10 @@ function drawImg(chosenImg) {
 
 function drawAllText() {
     gMeme.lines.forEach((line) => {
+        gCtx.font = `${line.size}px Impact`
+        gCtx.fillStyle = line.color
+        gCtx.strokeStyle = line.strokeColor
+        gCtx.textAlign = line.align
         gCtx.fillText(line.txt, line.posX, line.posY)
         gCtx.strokeText(line.txt, line.posX, line.posY)
     })
@@ -44,6 +48,11 @@ function drawText() {
     gCtx.strokeText(currLine.txt, currLine.posX, currLine.posY)
     drawAllText()
 }
+
+// function drawCanvas(){
+//     drawImg()
+//     drawAllText()
+// }
 
 function addLine() {
     var strHTML = ''
