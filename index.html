@@ -8,6 +8,7 @@
     <title>Meme</title>
     <link rel="shortcut icon" href="img/yuumi-head.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="content.css">
 </head>
 
 <body onload="init()">
@@ -20,20 +21,17 @@
             <ul class="nav-links clean-list">
                 <li class="gallery-link navies active" onclick="displayPage(this)">Gallery</li>
                 <li class="generator navies" onclick="displayPage(this)">Generator</li>
-                <li class="about navies yuumi" onclick="displayPage(this)">About</li>
+                <li class="my-memes-link navies" onclick="displayPage(this)">My Memes</li>
             </ul>
         </nav>
     </div>
     <div class="main-gallery main-layout">
         <div class="search-section">
             <div class="search-inputs">
-                <input type="search" name="SEARCH" placeholder="Search Memes">
-                <button class="btn-search">Search!</button>
+                <input type="search" name="SEARCH" placeholder="Search Memes"  oninput="searchTags(this)">
+                <button class="clear-search" onclick="clearSearch()">Clear!</button>
             </div>
             <div class="search-tags">
-                <div class="tag1">Funny</div>
-                <div class="tag2">Cats</div>
-                <div class="tag3">The Dog</div>
             </div>
         </div>
 
@@ -49,61 +47,72 @@
 
         <div class="generator-controls">
 
+            <div class="meme-texts">
+                <input class="meme-text" type="text" name="MEME-TEXT0" placeholder="Top text" oninput="drawText()">
+            </div>
+
             <div class="text-position">
 
-                <div class="meme-texts">
-                    <input class="meme-text" type="text" name="MEME-TEXT0" placeholder="Top text" onkeyup="drawText()">
-                </div>
-
                 <div class="line-editing">
-                    <button class="add-line" onclick="addLine()"></button>
-                    <button class="remove" onclick="removeLine()"></button>
-                    <button class="switch-row" onclick="switchLines()"></button>
+                    <button title="Add new line" class="add-line" onclick="addLine()"></button>
+                    <button title="Remove line" class="remove-line" onclick="removeLine()"></button>
+                    <button title="Switch lines" class="switch-line" onclick="switchLines()"></button>
+
+                    <button title="Text outline color" class="stroke-color"><input type="color"
+                            class="text-stroke-color" oninput="changeStrokeColor()"></button>
+                    <button title="Text color" class="font-color"><input type="color" class="text-font-color"
+                            oninput="changeFontColor()"></button>
+                    <button title="Save to my memes" class="save-to-memes" onclick="saveMeme()"></button>
+
+                    <button title="Line up" class="text-up" onclick="changeTextPlacement(-25)"></button>
+                    <button title="Line down" class="text-down" onclick="changeTextPlacement(25)"></button>
+                    <button title="Ready for download" class="ready" onclick="readyMeme()"></button></button>
+                    <button title="Line left" class="text-left" onclick="changeTextPlacement(-25, true)"></button>
+                    <button title="Line right" class="text-right" onclick="changeTextPlacement(25, true)"></button>
+
+                    <button title="Align left" class="align-left align" onclick="changeTextAlign('left')"></button>
+                    <button title="Align center" class="align-center align"
+                        onclick="changeTextAlign('center')"></button>
+                    <button title="Align right" class="align-right align" onclick="changeTextAlign('right')"></button>
+
+                    <button title="Increase font size" class="font-up" onclick="changeFontSize(3)"></button></button>
+                    <button title="Reduce font size" class="font-down" onclick="changeFontSize(-3)"></button>
+                    <a title="Download meme" href="#" onclick="downloadCanvas(this)" class="download"></a>
                 </div>
 
             </div>
-            <div class="text-position-btns">
-                <button class="text-up" onclick="changeTextPlacement(-25)"></button>
-                <button class="text-down" onclick="changeTextPlacement(25)"></button>
-                <button class="ready" onclick="readyMeme()"></button></button>
-                <button class="text-left" onclick="changeTextPlacement(-25, true)"></button>
-                <button class="text-right" onclick="changeTextPlacement(25, true)"></button>
-            </div>
-
-            <div class="text-styling">
-                <button class="font-up" onclick="changeFontSize(3)"></button></button>
-                <button class="font-down" onclick="changeFontSize(-3)"></button>
-                <button class="align-left align" onclick="changeTextAlign('left')"></button>
-                <button class="align-center align" onclick="changeTextAlign('center')"></button>
-                <button class="align-right align" onclick="changeTextAlign('right')"></button>
-                <button class="stroke-color"><input type="color" class="text-stroke-color"
-                        oninput="changeStrokeColor()"></button>
-                <button class="font-color"><input type="color" class="text-font-color"
-                        oninput="changeFontColor()"></button>
-            </div>
-
-            <div class="stickers">
+            <!-- <div class="stickers">
                 <img src="meme-imgs (square)/10.jpg">
                 <img src="meme-imgs (square)/12.jpg">
                 <img src="meme-imgs (square)/13.jpg">
                 <img src="meme-imgs (square)/14.jpg">
                 <img src="meme-imgs (square)/15.jpg">
                 <img src="meme-imgs (square)/16.jpg">
-            </div>
-
-            <div class="social">
-                <a href="#" onclick="downloadCanvas(this)" class="download"></a>
-                <button class="facebook"></button>
-            </div>
-
+            </div> -->
+            <form class="share-form" action="" method="POST" enctype="multipart/form-data"
+                onsubmit="uploadImg(this, event)">
+                <input name="img" id="imgData" type="hidden" />
+                <button title="Upload to server" class="btn publish" type="submit">Upload</button>
+                <div class="share-container"></div>
+            </form>
         </div>
-
-
-
 
     </div>
 
+    </div>
 
+    <div class="my-memes main-layout hide">
+        <div class="saved-memes">
+
+        </div>
+    </div>
+
+
+
+
+
+    <script src="js/upload-service.js"></script>
+    <script src="js/storage-service.js"></script>
     <script src="js/meme-service.js"></script>
     <script src="js/canvas-service.js"></script>
     <script src="js/main.js"></script>

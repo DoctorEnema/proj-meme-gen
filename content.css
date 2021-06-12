@@ -1,0 +1,217 @@
+.publish::before {
+    content: "\f093"
+}
+
+.download::before {
+    font-family: fa-solid, sans-serif;
+    content: "\f019"
+}
+
+.facebook::before {
+    font-family: fa-brands, sans-serif;
+    font-size: 15px;
+    content: "\f39e";
+    padding: 0 3px;
+}
+
+.share-fb::before {
+    font-family: fa-brands, sans-serif;
+    content: "\f39e";
+}
+
+.save-to-memes::before {
+    content: "\f0c7"
+}
+
+.add-line::before {
+    content: "\f067"
+}
+
+.remove-line::before {
+    content: "\f2ed"
+}
+
+.switch-line::before {
+    content: "\f362"
+}
+
+.text-up::before {
+    content: "\f062";
+}
+
+.text-down::before {
+    content: "\f063";
+}
+
+.text-left::before {
+    content: "\f060"
+}
+
+.text-right::before {
+    content: "\f061"
+}
+
+.font-up::before {
+    content: "\f424"
+}
+
+.font-down::before {
+    content: "\f422"
+}
+
+.align-left::before {
+    content: "\f036"
+}
+
+.align-center::before {
+    content: "\f037"
+}
+
+.align-right::before {
+    content: "\f038"
+}
+
+.stroke-color::before {
+    content: "\f853"
+}
+
+.font-color::before {
+    content: "\f53f"
+}
+
+.ready::before {
+    content: "\f00c";
+}
+
+.save-to-memes {
+    grid-area: save-meme;
+}
+
+.text-up {
+    grid-area: up;
+}
+
+.text-left {
+    grid-area: left;
+}
+
+.ready {
+    grid-area: accept;
+}
+
+.text-right {
+    grid-area: right;
+}
+
+.text-down {
+    grid-area: down;
+}
+
+.add-line {
+    grid-area: add;
+}
+
+.remove-line {
+    grid-area: remove;
+}
+
+.switch-line {
+    grid-area: switch;
+}
+
+.font-up {
+    grid-area: font-up
+}
+
+.font-down {
+    grid-area: font-down
+}
+
+.align-left {
+    grid-area: align-left
+}
+
+.align-center {
+    grid-area: align-center
+}
+
+.align-right {
+    grid-area: align-right
+}
+
+.stroke-color {
+    grid-area: stroke-color
+}
+
+.font-color {
+    grid-area: font-color
+}
+
+.download {
+    grid-area: download;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 
+@media (min-width: 820px){
+    .main-layout {
+        width: 820px;
+        margin: 0 auto;
+    }
+    .nav-links li {
+        padding: 2rem;
+        border-inline-start: 1px solid black;
+        background-image: url(img/yuumi2.png);
+        background-size: 3rem;
+        background-position: center 5rem;
+        background-repeat: no-repeat;
+        transition: 0.4s;
+        transition-timing-function: cubic-bezier(.88, .74, .15, 1.53);
+    }
+}
+
+@media (min-width: 980px) {
+
+    .main-layout {
+        width: 980px;
+        margin: 0 auto;
+    }
+
+}
+
+
+.nav-links li {
+    padding: 1rem;
+    border-inline-start: 1px solid black;
+    background-image: url(img/yuumi2.png);
+    background-size: 3rem;
+    background-position: center -3rem;
+    background-repeat: no-repeat;
+    transition: 0.4s;
+    transition-timing-function: cubic-bezier(.88, .74, .15, 1.53);
+}
+
+.nav-links li:hover {
+    cursor: pointer;
+    color: #f3c942;
+}
+
+.all-logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    font-size: 2rem;
+}
+
+.yuumi-head {
+    width: 4rem;
+    height: 3rem;
+    background-image: url(img/yuumi-head3.png);
+    background-size: 4rem;
+    background-repeat: no-repeat;
+    background-position: center -.8rem;
+} */

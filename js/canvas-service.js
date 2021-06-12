@@ -3,14 +3,22 @@
 var gElCanvas
 var gCtx
 var gMouseDown
+var gMemeReady
+var gMemesToDisplay
+var gFoundTags
 
 function init() {
     gElCanvas = getCanvas()
     gCtx = gElCanvas.getContext('2d')
-    // gMouseDown = false
-    renderGallery()
-    // addTouchListeners()
-    // addMouseListeners()
+    gMemesToDisplay = gImgs
+    // renderGallery()
+    getImagesToDisplay()
+    // searchTags()
+    gMemeReady = false
+    if (!gMyMemes || !gMyMemes.length) gMyMemes = []
+    else gMyMemes = loadFromStorage('myMemes')
+    displaySaved()
+    displayTags()
 }
 
 
@@ -26,7 +34,7 @@ function drawImg(chosenImg) {
 
 function drawAllText() {
     gMeme.lines.forEach((line) => {
-        gCtx.font = `${line.size}px Impact`
+        // gCtx.font = `${line.size}px Impact`
         gCtx.fillStyle = line.color
         gCtx.strokeStyle = line.strokeColor
         gCtx.textAlign = line.align
@@ -38,12 +46,11 @@ function drawAllText() {
 function drawText() {
     var currLine = gMeme.lines[gMeme.selectedLineIdx]
     currLine.txt = document.querySelector(`input[name=MEME-TEXT${gMeme.selectedLineIdx}]`).value
-    gCtx.font = `${currLine.size}px Impact`
+    gCtx.font = `${currLine.size}px Arial`
     gCtx.fillStyle = currLine.color
     gCtx.lineWidth = 1
     gCtx.strokeStyle = currLine.strokeColor
     gCtx.textAlign = currLine.align
-    // clearCanvas()
     gCtx.drawImage(gCurrImg, 0, 0, gElCanvas.width, gElCanvas.height)
     gCtx.fillText(currLine.txt, currLine.posX, currLine.posY)
     gCtx.strokeText(currLine.txt, currLine.posX, currLine.posY)
@@ -55,19 +62,25 @@ function drawText() {
     drawAllText()
 }
 
-function removeLine(){
-    if(gMeme.lines.length === 1) return
+function removeLine() {
+    if (gMeme.lines.length === 1) return
     var currLineIdx = gMeme.selectedLineIdx
     var lastLineIdx = gMeme.lines.length - 1
     gMeme.lines.splice(currLineIdx, 1)
     document.querySelector(`input[name=MEME-TEXT${gMeme.selectedLineIdx}]`).classList.add('hide')
     gMeme.selectedLineIdx--
-    if(gMeme.selectedLineIdx < 0) gMeme.selectedLineIdx = lastLineIdx -1
+    if (gMeme.selectedLineIdx < 0) gMeme.selectedLineIdx = lastLineIdx - 1
     document.querySelector(`input[name=MEME-TEXT${gMeme.selectedLineIdx}]`).classList.remove('hide')
     drawText()
 }
 
+function readyMeme() {
+    gMemeReady = !gMemeReady
+    drawText()
+}
+
 function drawRectRev(x, y) {
+    if (gMemeReady) return
     var currLine = gMeme.lines[gMeme.selectedLineIdx]
     var testing = gCtx.measureText(currLine.txt)
     gCtx.beginPath()
@@ -76,6 +89,7 @@ function drawRectRev(x, y) {
     gCtx.stroke()
 }
 function drawRect(x, y) {
+    if (gMemeReady) return
     var currLine = gMeme.lines[gMeme.selectedLineIdx]
     var testing = gCtx.measureText(currLine.txt)
     gCtx.beginPath()
@@ -85,6 +99,7 @@ function drawRect(x, y) {
 }
 
 function drawLine(x, y) {
+    if (gMemeReady) return
     var currLine = gMeme.lines[gMeme.selectedLineIdx]
     var diff = y - (currLine.size + 15)
     var textWidth = gCtx.measureText(currLine.txt).width
@@ -224,8 +239,8 @@ function chooseImage(img) {
     displayPage(generator)
     resizeCanvas(img)
     gMeme.lines[0].posX = gElCanvas.width / 2,
-    gMeme.lines[0].posY = gElCanvas.height / 6,
-    drawImg(img.src)
+        gMeme.lines[0].posY = gElCanvas.height / 6,
+        drawImg(img.src)
     gCurrImg = img
     changeTextAlign(gMeme.lines[0].align)
     document.querySelectorAll('.meme-text').forEach((el) => el.classList.add('hide'))
@@ -245,18 +260,44 @@ function downloadCanvas(elLink) {
     elLink.download = 'my-img.png'
 }
 
+function saveMeme() {
+        gMyMemes.unshift(gElCanvas.toDataURL())
+        saveToStorage('myMemes', gMyMemes)
+    displaySaved()
+}
 
+function displaySaved() {
+    var strHTML = ''
+    var img = new Image()
+    var myMemes = loadFromStorage('myMemes')
+    var savedMemes = document.querySelector('.saved-memes')
+    myMemes.forEach((meme) => {
+        img.src = meme
+        strHTML += `<a href="${img.src}" download="${makeId()}"><img class="saved-meme" src="${img.src}"></a>`
+    })
+    savedMemes.innerHTML = strHTML
+}
 
+function makeId(length = 5) {
+    var txt = '';
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (var i = 0; i < length; i++) {
+        txt += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return txt;
+}
 
+//icon for save meme
+//facebook share
+//todo SEARCH
+//mobile layout
 
-// function addMouseListeners() {
-//     gElCanvas.addEventListener('mousedown', canvasClicked)
-//     gElCanvas.addEventListener('mousemove', onMove)
-//     gElCanvas.addEventListener('mouseup', () => gMouseDown = false)
-// }
+//generator font family
 
-// function addTouchListeners() {
-//     gElCanvas.addEventListener('touchstart', canvasClicked)
-//     gElCanvas.addEventListener('touchmove', onMove)
-//     gElCanvas.addEventListener('touchend', () => gMouseDown = false)
-// }
+//animated navbar
+//stickers
+//polish generator
+//try to fix bug where switching lines deletes some lines
+//i18n
+//web share api?
+//upload picture

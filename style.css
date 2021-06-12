@@ -22,43 +22,38 @@
     src: url(fonts/HammersmithOne-Regular.ttf);
 }
 
+/* Generals */
+
 body {
     font-family: hammersmith, sans-serif;
     margin: 0;
 }
 
-.main-nav {
-    background-color: #546bf3;
+a {
+    text-decoration: none;
+    color: white;
 }
 
-.main-layout {
-    width: 980px;
-    margin: 0 auto;
+/* Nav */
+
+.main-nav {
+    background-color: #546bf3;
 }
 
 nav {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     color: #d4ddf7;
     font-weight: 600;
-    /* text-shadow: 0px 0px 3px #fdfd90; ; */
-}
-
-.clean-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
 }
 
 .nav-links {
     display: flex;
-    align-items: center;
-    align-items: flex-start;
 }
 
 .nav-links ul {
     padding-inline-end: 2rem;
+    /* might do nothing? */
 }
 
 ul:first-of-type {
@@ -66,15 +61,13 @@ ul:first-of-type {
 }
 
 .nav-links li {
-    padding: 2rem;
+    padding: 0 1rem;
     border-inline-start: 1px solid black;
     background-image: url(img/yuumi2.png);
     background-size: 3rem;
-    background-position: center 5rem;
+    background-position: center 2.5rem;
     background-repeat: no-repeat;
-    /* transition: background-position 0.4s; */
     transition: 0.4s;
-    /* transition-timing-function: ease; */
     transition-timing-function: cubic-bezier(.88, .74, .15, 1.53);
 }
 
@@ -90,13 +83,14 @@ ul:first-of-type {
 
 .logo {
     font-size: 2rem;
+    display: none;
 }
 
 .yuumi-head {
-    width:7rem;
-    height: 5.2rem;
+    width: 4rem;
+    height: 3rem;
     background-image: url(img/yuumi-head3.png);
-    background-size: 6rem;
+    background-size: 4rem;
     background-repeat: no-repeat;
     background-position: center -.8rem;
 }
@@ -105,14 +99,12 @@ ul:first-of-type {
     background-image: url(img/yuumi-head-tilt.png);
 }
 
-.active {
-    box-shadow: inset 0px -6px 0px 0px #f3c942;
-}
+/* Search Section */
 
 .search-section {
     display: flex;
     padding: 2rem 0;
-    /* justify-content: space-between; */
+    flex-direction: column;
 }
 
 .search-inputs {
@@ -127,7 +119,15 @@ ul:first-of-type {
 
 .search-tags>* {
     padding-inline-start: 1rem;
+    color: #529ecc
 }
+
+.search-tags>*:hover {
+    color: #f3c942;
+    cursor: pointer;
+}
+
+/* Gallery */
 
 .gallery img {
     width: 100%;
@@ -138,8 +138,10 @@ ul:first-of-type {
 .gallery {
     display: grid;
     gap: 0.5rem;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 }
+
+/* Generator */
 
 .main-generator {
     display: flex;
@@ -148,17 +150,12 @@ ul:first-of-type {
     padding: 0.5rem;
     overflow-x: hidden;
     gap: 0.5rem;
+    flex-direction: column;
 }
 
 .canvas-container {
     display: block;
-    background-color: wheat;
     flex: 1;
-}
-
-.generator-controls {
-    width: 400px;
-    padding-bottom: 3rem
 }
 
 .generator-controls button {
@@ -166,13 +163,27 @@ ul:first-of-type {
     color: white;
     border: none;
     border-radius: 0.5rem;
-    font-family: fa-solid, sans-serif;
+    font-family: fa-solid, hammersmith, sans-serif;
     padding: 1rem;
+}
+
+.generator-controls a {
+    background-color: #546bf3;
+    border-radius: 0.5rem;
+    padding: 0.9rem 1.1rem
 }
 
 .generator-controls button:hover {
     cursor: pointer;
     color: #f3c942;
+}
+
+/* Generator Inputs */
+
+.text-position {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .meme-text {
@@ -182,147 +193,32 @@ ul:first-of-type {
     font-size: 1.6rem;
 }
 
-.text-position-btns {
+.line-editing {
     padding: .25rem;
     display: grid;
-    grid-auto-columns: 3rem;
-    grid-template-areas: ". up ." "left accept right" ". down .";
+    grid-auto-columns: 4rem;
+    grid-auto-rows: 4rem;
+    grid-template-areas: "switch add . font-color stroke-color" "remove . up . download" ". left accept right ." "align-center . down . save-meme" "align-left align-right . font-up font-down";
     gap: 0.2rem;
 }
 
-.text-up {
-    grid-area: up;
+.download:hover {
+    color: #f3c942
 }
 
-.text-left {
-    grid-area: left;
-}
-
-.ready {
-    grid-area: accept;
-}
-
-.ready::before {
-    content: "\f00c";
-}
-
-.text-right {
-    grid-area: right;
-}
-
-.text-down {
-    grid-area: down;
-}
-
-.line-editing {
-    padding: 0.25rem;
-}
-
-.text-styling {
-    padding: .25rem;
-}
-
-.text-styling>* {
-    margin: .5rem 0;
-}
-
-.stickers img {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-}
-
-.add-line::before {
-    content: "\f067"
-}
-
-.remove::before {
-    content: "\f2ed"
-}
-
-.switch-row::before {
-    content: "\f362"
-}
-
-.text-up::before {
-    content: "\f062";
-}
-
-.text-down::before {
-    content: "\f063";
-}
-
-.text-left::before {
-    content: "\f060"
-}
-
-.text-right::before {
-    content: "\f061"
-}
-
-.font-up::before {
-    content: "\f424"
-}
-
-.font-down::before {
-    content: "\f422"
-}
-
-.align-left::before {
-    content: "\f036"
-}
-
-.align-center::before {
-    content: "\f037"
-}
-
-.align-right::before {
-    content: "\f038"
-}
-
-.stroke-color::before {
-    content: "\f853"
-}
-
-.font-color::before {
-    content: "\f53f"
-}
-
-.stickers {
-    width: 100%;
+.share-form {
     display: flex;
-    overflow-x: scroll;
-    padding: .25rem;
-}
-
-.social {
-    padding: .25rem;
-}
-
-.social>* {
-    background-color: #546bf3;
-    color: #b4c5f5;
-    border: none;
-    border-radius: 0.5rem;
-    font-family: fa-solid, sans-serif;
+    gap: .5rem;
+    justify-content: center;
     padding: 1rem;
 }
 
-.download::before {
-    font-family: fa-solid, sans-serif;
-    content: "\f019"
+.share-fb {
+    position: relative;
+    top: 0.9rem;
 }
 
-.facebook::before {
-    font-family: fa-brands, sans-serif;
-    font-size: 15px;
-    content: "\f39e";
-    padding: 0 3px;
-}
-
-.hide {
-    display: none;
-}
+/* Colors */
 
 .font-color {
     position: relative
@@ -350,4 +246,144 @@ ul:first-of-type {
     top: 0px;
     opacity: 0;
     cursor: pointer;
+}
+
+/* End Colors */
+
+/* Saved Memes */
+
+.saved-memes img {
+    width: 100%;
+}
+
+.saved-memes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+/* End Saved Memes */
+
+/* Helpers */
+
+.clean-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.active {
+    box-shadow: inset 0px -6px 0px 0px #f3c942;
+}
+
+.hide {
+    display: none;
+}
+
+@media (min-width: 820px) {
+    .main-layout {
+        width: 820px;
+        margin: 0 auto;
+    }
+    .nav-links li {
+        padding: 2rem;
+        border-inline-start: 1px solid black;
+        background-image: url(img/yuumi2.png);
+        background-size: 3rem;
+        background-position: center 5rem;
+        background-repeat: no-repeat;
+        transition: 0.4s;
+        transition-timing-function: cubic-bezier(.88, .74, .15, 1.53);
+    }
+    .nav-links li:hover {
+        cursor: pointer;
+        color: #f3c942;
+    }
+    .all-logo {
+        display: flex;
+        align-items: center;
+    }
+    .logo {
+        font-size: 2rem;
+    }
+    .yuumi-head {
+        width: 7rem;
+        height: 5.2rem;
+        background-image: url(img/yuumi-head3.png);
+        background-size: 6rem;
+        background-repeat: no-repeat;
+        background-position: center -.8rem;
+    }
+    .saved-memes {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 980px) {
+    .main-layout {
+        width: 980px;
+        margin: 0 auto;
+    }
+}
+
+/* .stickers img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.stickers {
+    width: 100%;
+    display: flex;
+    overflow-x: scroll;
+    padding: .25rem;
+} */
+
+@media (min-width: 820px) {
+    .main-layout {
+        width: 820px;
+        margin: 0 auto;
+    }
+    .nav-links li {
+        padding: 2rem;
+        border-inline-start: 1px solid black;
+        background-image: url(img/yuumi2.png);
+        background-size: 3rem;
+        background-position: center 5rem;
+        background-repeat: no-repeat;
+        transition: 0.4s;
+        transition-timing-function: cubic-bezier(.88, .74, .15, 1.53);
+    }
+    .yuumi-head {
+        width: 7rem;
+        height: 5.2rem;
+        background-image: url(img/yuumi-head3.png);
+        background-size: 6rem;
+        background-repeat: no-repeat;
+        background-position: center -.8rem;
+    }
+    .logo {
+        display: block;
+    }
+    .search-section {
+        display: flex;
+        flex-direction: row;
+    }
+    .gallery {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .main-generator {
+        flex-direction: row;
+    }
+    .line-editing {
+        grid-auto-columns: 3rem;
+        grid-auto-rows: 3rem;
+    }
+}
+
+@media (min-width: 980px) {
+    .main-layout {
+        width: 980px;
+        margin: 0 auto;
+    }
 }
