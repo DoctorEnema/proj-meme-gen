@@ -7,7 +7,7 @@ var gMouseDown
 function init() {
     gElCanvas = getCanvas()
     gCtx = gElCanvas.getContext('2d')
-    gMouseDown = false
+    // gMouseDown = false
     renderGallery()
     // addTouchListeners()
     // addMouseListeners()
@@ -20,6 +20,7 @@ function drawImg(chosenImg) {
     img.src = chosenImg
     img.onload = () => {
         gCtx.drawImage(gCurrImg, 0, 0, gElCanvas.width, gElCanvas.height)
+        drawText()
     }
 }
 
@@ -39,7 +40,7 @@ function drawText() {
     currLine.txt = document.querySelector(`input[name=MEME-TEXT${gMeme.selectedLineIdx}]`).value
     gCtx.font = `${currLine.size}px Impact`
     gCtx.fillStyle = currLine.color
-    gCtx.lineWidth = 2
+    gCtx.lineWidth = 1
     gCtx.strokeStyle = currLine.strokeColor
     gCtx.textAlign = currLine.align
     // clearCanvas()
@@ -52,7 +53,18 @@ function drawText() {
         drawRect(currLine.posX - currLine.size / 8, currLine.posY - currLine.size)
     } else drawLine(currLine.posX, currLine.posY + currLine.size / 4)
     drawAllText()
+}
 
+function removeLine(){
+    if(gMeme.lines.length === 1) return
+    var currLineIdx = gMeme.selectedLineIdx
+    var lastLineIdx = gMeme.lines.length - 1
+    gMeme.lines.splice(currLineIdx, 1)
+    document.querySelector(`input[name=MEME-TEXT${gMeme.selectedLineIdx}]`).classList.add('hide')
+    gMeme.selectedLineIdx--
+    if(gMeme.selectedLineIdx < 0) gMeme.selectedLineIdx = lastLineIdx -1
+    document.querySelector(`input[name=MEME-TEXT${gMeme.selectedLineIdx}]`).classList.remove('hide')
+    drawText()
 }
 
 function drawRectRev(x, y) {
@@ -77,7 +89,6 @@ function drawLine(x, y) {
     var diff = y - (currLine.size + 15)
     var textWidth = gCtx.measureText(currLine.txt).width
     gCtx.beginPath()
-    gCtx.lineWidth = 2
     gCtx.moveTo(x, y)
     gCtx.lineTo(x - textWidth / 1.9, y)
     gCtx.lineTo(x + textWidth / 1.9, y)
@@ -87,11 +98,16 @@ function drawLine(x, y) {
     gCtx.lineTo(x + textWidth / 1.9, y)
     gCtx.strokeStyle = 'black'
     gCtx.stroke()
-
 }
 
-
-
+function switchLines() {
+    if (gMeme.selectedLineIdx >= gMeme.lines.length - 1) gMeme.selectedLineIdx = -1
+    gMeme.selectedLineIdx++
+    document.querySelectorAll('.meme-text').forEach((el) => el.classList.add('hide'))
+    document.querySelector(`input[name=MEME-TEXT${gMeme.selectedLineIdx}]`).classList.remove('hide')
+    drawText()
+    //fix bug that doesn't display top and bottom text on first switch
+}
 
 function addLine() {
     var strHTML = ''
@@ -102,6 +118,7 @@ function addLine() {
     gMeme.selectedLineIdx = lastIdx
 
     if (textPosition === 'Bottom Text') {
+        document.querySelector(`input[name=MEME-TEXT${lastIdx}]`).value = textPosition
         gMeme.lines.push({
             txt: document.querySelector(`input[name=MEME-TEXT${lastIdx}]`).value,
             size: 50,
@@ -113,6 +130,7 @@ function addLine() {
         })
     }
     else {
+        document.querySelector(`input[name=MEME-TEXT${lastIdx}]`).value = textPosition
         gMeme.lines.push({
             txt: document.querySelector(`input[name=MEME-TEXT${lastIdx}]`).value,
             size: 50,
@@ -125,24 +143,57 @@ function addLine() {
     }
     document.querySelectorAll('.meme-text').forEach((el) => el.classList.add('hide'))
     document.querySelector(`input[name=MEME-TEXT${lastIdx}]`).classList.remove('hide')
+    changeTextAlign(gMeme.lines[lastIdx].align)
 }
 
 
+function changeTextPlacement(diff, isHorizontal) {
+    var currLine = gMeme.lines[gMeme.selectedLineIdx]
+    if (isHorizontal) currLine.posX += diff
+    else currLine.posY += diff
+    drawText()
+}
 
+function changeFontColor() {
+    var currLine = gMeme.lines[gMeme.selectedLineIdx]
+    var fontColor = document.querySelector('.text-font-color')
+    var fontColorBtn = document.querySelector('.font-color')
+    fontColorBtn.style.color = `${fontColor.value}`
+    currLine.color = fontColor.value
+    drawText()
+}
 
-
+function changeStrokeColor() {
+    var currLine = gMeme.lines[gMeme.selectedLineIdx]
+    var strokeColor = document.querySelector('.text-stroke-color')
+    var strokeColorBtn = document.querySelector('.stroke-color')
+    strokeColorBtn.style.color = `${strokeColor.value}`
+    currLine.strokeColor = strokeColor.value
+    drawText()
+}
 
 function changeFontSize(diff) {
-    var currMeme = gMeme.lines[gMeme.selectedLineIdx]
-    currMeme.size += diff
+    var currLine = gMeme.lines[gMeme.selectedLineIdx]
+    currLine.size += diff
     drawText()
 }
 function changeTextAlign(alignment) {
-    var currMeme = gMeme.lines[gMeme.selectedLineIdx]
-    currMeme.align = alignment
-    if (alignment === 'right') currMeme.posX = gElCanvas.width / 1.1
-    else if (alignment === 'left') currMeme.posX = gElCanvas.width / 9
-    else currMeme.posX = gElCanvas.width / 2
+    document.querySelectorAll('.align').forEach((el) => el.classList.remove('active'))
+    var elAlign = document.querySelector(`.align-${alignment}`)
+    var currLine = gMeme.lines[gMeme.selectedLineIdx]
+    currLine.align = alignment
+    if (alignment === 'right') {
+        currLine.posX = gElCanvas.width / 1.1
+        elAlign.classList.add('active')
+    }
+    else if
+        (alignment === 'left') {
+        currLine.posX = gElCanvas.width / 9
+        elAlign.classList.add('active')
+    } else {
+        currLine.posX = gElCanvas.width / 2
+        elAlign.classList.add('active')
+    }
     drawText()
 }
 
@@ -166,16 +217,20 @@ function chooseImage(img) {
                 align: 'center',
                 color: 'white',
                 strokeColor: 'black',
-                posX: gElCanvas.width / 1.1,
-                posY: gElCanvas.height / 2,
             }
         ]
     }
     var generator = document.querySelector('.generator')
     displayPage(generator)
-    drawImg(img.src)
     resizeCanvas(img)
+    gMeme.lines[0].posX = gElCanvas.width / 2,
+    gMeme.lines[0].posY = gElCanvas.height / 6,
+    drawImg(img.src)
     gCurrImg = img
+    changeTextAlign(gMeme.lines[0].align)
+    document.querySelectorAll('.meme-text').forEach((el) => el.classList.add('hide'))
+    document.querySelector(`input[name=MEME-TEXT0]`).classList.remove('hide')
+    document.querySelector(`input[name=MEME-TEXT0]`).value = 'TOP TEXT'
 }
 
 function resizeCanvas(img) {
@@ -190,14 +245,18 @@ function downloadCanvas(elLink) {
     elLink.download = 'my-img.png'
 }
 
-function addMouseListeners() {
-    gElCanvas.addEventListener('mousedown', canvasClicked)
-    gElCanvas.addEventListener('mousemove', onMove)
-    gElCanvas.addEventListener('mouseup', () => gMouseDown = false)
-}
 
-function addTouchListeners() {
-    gElCanvas.addEventListener('touchstart', canvasClicked)
-    gElCanvas.addEventListener('touchmove', onMove)
-    gElCanvas.addEventListener('touchend', () => gMouseDown = false)
-}
+
+
+
+// function addMouseListeners() {
+//     gElCanvas.addEventListener('mousedown', canvasClicked)
+//     gElCanvas.addEventListener('mousemove', onMove)
+//     gElCanvas.addEventListener('mouseup', () => gMouseDown = false)
+// }
+
+// function addTouchListeners() {
+//     gElCanvas.addEventListener('touchstart', canvasClicked)
+//     gElCanvas.addEventListener('touchmove', onMove)
+//     gElCanvas.addEventListener('touchend', () => gMouseDown = false)
+// }

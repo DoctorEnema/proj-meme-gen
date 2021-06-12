@@ -1,26 +1,44 @@
 * {
     box-sizing: border-box;
 }
+
+@font-face {
+    font-family: fa-regular;
+    src: url(fonts/fa-regular-400.ttf);
+}
+
+@font-face {
+    font-family: fa-solid;
+    src: url(fonts/fa-solid-900.ttf);
+}
+
+@font-face {
+    font-family: fa-brands;
+    src: url(fonts/fa-brands-400.ttf);
+}
+
+@font-face {
+    font-family: hammersmith;
+    src: url(fonts/HammersmithOne-Regular.ttf);
+}
+
 body {
+    font-family: hammersmith, sans-serif;
     margin: 0;
 }
 
-
-.main-nav{
+.main-nav {
     background-color: #546bf3;
 }
 
-
-.main-layout{
+.main-layout {
     width: 980px;
     margin: 0 auto;
-    
 }
 
 nav {
     display: flex;
     justify-content: space-between;
-
     align-items: center;
     color: #d4ddf7;
     font-weight: 600;
@@ -36,6 +54,7 @@ nav {
 .nav-links {
     display: flex;
     align-items: center;
+    align-items: flex-start;
 }
 
 .nav-links ul {
@@ -49,25 +68,46 @@ ul:first-of-type {
 .nav-links li {
     padding: 2rem;
     border-inline-start: 1px solid black;
+    background-image: url(img/yuumi2.png);
+    background-size: 3rem;
+    background-position: center 5rem;
+    background-repeat: no-repeat;
+    /* transition: background-position 0.4s; */
+    transition: 0.4s;
+    /* transition-timing-function: ease; */
+    transition-timing-function: cubic-bezier(.88, .74, .15, 1.53);
 }
 
 .nav-links li:hover {
     cursor: pointer;
-    color: #f3c942
+    color: #f3c942;
+}
+
+.all-logo {
+    display: flex;
+    align-items: center;
 }
 
 .logo {
     font-size: 2rem;
 }
 
+.yuumi-head {
+    width:7rem;
+    height: 5.2rem;
+    background-image: url(img/yuumi-head3.png);
+    background-size: 6rem;
+    background-repeat: no-repeat;
+    background-position: center -.8rem;
+}
+
+.yuumi-head:hover {
+    background-image: url(img/yuumi-head-tilt.png);
+}
+
 .active {
     box-shadow: inset 0px -6px 0px 0px #f3c942;
 }
-
-
-
-
-
 
 .search-section {
     display: flex;
@@ -97,6 +137,7 @@ ul:first-of-type {
 
 .gallery {
     display: grid;
+    gap: 0.5rem;
     grid-template-columns: repeat(4, 1fr);
 }
 
@@ -117,23 +158,21 @@ ul:first-of-type {
 
 .generator-controls {
     width: 400px;
-    padding-bottom:3rem
+    padding-bottom: 3rem
 }
 
-.generator-controls button{
-    background-color:#546bf3 ;
-    color:#b4c5f5 ;
+.generator-controls button {
+    background-color: #546bf3;
+    color: white;
     border: none;
     border-radius: 0.5rem;
+    font-family: fa-solid, sans-serif;
+    padding: 1rem;
 }
 
-.generator-controls button:hover{
+.generator-controls button:hover {
     cursor: pointer;
-}
-
-.generator-controls button img{
-    width: 40px;
-    height: 100%;
+    color: #f3c942;
 }
 
 .meme-text {
@@ -143,14 +182,47 @@ ul:first-of-type {
     font-size: 1.6rem;
 }
 
-.text-position-btns{
+.text-position-btns {
+    padding: .25rem;
+    display: grid;
+    grid-auto-columns: 3rem;
+    grid-template-areas: ". up ." "left accept right" ". down .";
+    gap: 0.2rem;
+}
+
+.text-up {
+    grid-area: up;
+}
+
+.text-left {
+    grid-area: left;
+}
+
+.ready {
+    grid-area: accept;
+}
+
+.ready::before {
+    content: "\f00c";
+}
+
+.text-right {
+    grid-area: right;
+}
+
+.text-down {
+    grid-area: down;
+}
+
+.line-editing {
+    padding: 0.25rem;
+}
+
+.text-styling {
     padding: .25rem;
 }
 
-.text-styling{
-    padding: .25rem;
-}
-.text-styling>*{
+.text-styling>* {
     margin: .5rem 0;
 }
 
@@ -160,6 +232,62 @@ ul:first-of-type {
     object-fit: contain;
 }
 
+.add-line::before {
+    content: "\f067"
+}
+
+.remove::before {
+    content: "\f2ed"
+}
+
+.switch-row::before {
+    content: "\f362"
+}
+
+.text-up::before {
+    content: "\f062";
+}
+
+.text-down::before {
+    content: "\f063";
+}
+
+.text-left::before {
+    content: "\f060"
+}
+
+.text-right::before {
+    content: "\f061"
+}
+
+.font-up::before {
+    content: "\f424"
+}
+
+.font-down::before {
+    content: "\f422"
+}
+
+.align-left::before {
+    content: "\f036"
+}
+
+.align-center::before {
+    content: "\f037"
+}
+
+.align-right::before {
+    content: "\f038"
+}
+
+.stroke-color::before {
+    content: "\f853"
+}
+
+.font-color::before {
+    content: "\f53f"
+}
+
 .stickers {
     width: 100%;
     display: flex;
@@ -167,10 +295,59 @@ ul:first-of-type {
     padding: .25rem;
 }
 
-.social{
+.social {
     padding: .25rem;
 }
 
-.hide{
+.social>* {
+    background-color: #546bf3;
+    color: #b4c5f5;
+    border: none;
+    border-radius: 0.5rem;
+    font-family: fa-solid, sans-serif;
+    padding: 1rem;
+}
+
+.download::before {
+    font-family: fa-solid, sans-serif;
+    content: "\f019"
+}
+
+.facebook::before {
+    font-family: fa-brands, sans-serif;
+    font-size: 15px;
+    content: "\f39e";
+    padding: 0 3px;
+}
+
+.hide {
     display: none;
+}
+
+.font-color {
+    position: relative
+}
+
+.text-font-color {
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    right: 0px;
+    top: 0px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.stroke-color {
+    position: relative
+}
+
+.text-stroke-color {
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    right: 0px;
+    top: 0px;
+    opacity: 0;
+    cursor: pointer;
 }

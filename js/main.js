@@ -3,7 +3,9 @@
 function displayPage(clicked) {
 
     document.querySelectorAll('.navies').forEach((el) => el.classList.remove('active'))
+    document.querySelectorAll('.navies').forEach((el) => el.style.backgroundPosition = 'center 5rem')
     clicked.classList.add('active')
+    clicked.style.backgroundPosition = 'center 2.3rem'
     var galleryLink = document.querySelector('.gallery-link')
     var generatorLink = document.querySelector('.generator')
     var gallery = document.querySelector('.main-gallery')

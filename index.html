@@ -6,18 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meme</title>
-    <link rel="shortcut icon" href="smiley.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="img/yuumi-head.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body onload="init()">
     <div class="main-nav">
         <nav class="main-layout">
-            <div class="logo">Yuumemes</div>
+            <div class="all-logo">
+                <div class="yuumi-head"></div>
+                <div class="logo">Yuumemes</div>
+            </div>
             <ul class="nav-links clean-list">
                 <li class="gallery-link navies active" onclick="displayPage(this)">Gallery</li>
                 <li class="generator navies" onclick="displayPage(this)">Generator</li>
-                <li class="about navies" onclick="displayPage(this)">About</li>
+                <li class="about navies yuumi" onclick="displayPage(this)">About</li>
             </ul>
         </nav>
     </div>
@@ -47,24 +50,36 @@
         <div class="generator-controls">
 
             <div class="text-position">
+
                 <div class="meme-texts">
                     <input class="meme-text" type="text" name="MEME-TEXT0" placeholder="Top text" onkeyup="drawText()">
                 </div>
-                <div class="text-position-btns">
-                    <button><img src="img/icons/add.png" onclick="addLine()"></button>
-                    <button><img src="img/icons/remove.png"></button>
-                    <button><img src="img/icons/upAndDown.png"></button>
+
+                <div class="line-editing">
+                    <button class="add-line" onclick="addLine()"></button>
+                    <button class="remove" onclick="removeLine()"></button>
+                    <button class="switch-row" onclick="switchLines()"></button>
                 </div>
+
+            </div>
+            <div class="text-position-btns">
+                <button class="text-up" onclick="changeTextPlacement(-25)"></button>
+                <button class="text-down" onclick="changeTextPlacement(25)"></button>
+                <button class="ready" onclick="readyMeme()"></button></button>
+                <button class="text-left" onclick="changeTextPlacement(-25, true)"></button>
+                <button class="text-right" onclick="changeTextPlacement(25, true)"></button>
             </div>
 
             <div class="text-styling">
-                <button><img src="img/icons/IncreaseFont.png" onclick="changeFontSize(3)"></button>
-                <button><img src="img/icons/decreaseFont.png" onclick="changeFontSize(-3)"></button>
-                <button><img src="img/icons/alignLeft.png" onclick="changeTextAlign('left')"></button>
-                <button><img src="img/icons/textCenter.png" onclick="changeTextAlign('center')"></button>
-                <button><img src="img/icons/alignRight.png" onclick="changeTextAlign('right')"></button>
-                <button><img src="img/icons/textStroke.png"></button>
-                <button><img src="img/icons/colorPicker.png"></button>
+                <button class="font-up" onclick="changeFontSize(3)"></button></button>
+                <button class="font-down" onclick="changeFontSize(-3)"></button>
+                <button class="align-left align" onclick="changeTextAlign('left')"></button>
+                <button class="align-center align" onclick="changeTextAlign('center')"></button>
+                <button class="align-right align" onclick="changeTextAlign('right')"></button>
+                <button class="stroke-color"><input type="color" class="text-stroke-color"
+                        oninput="changeStrokeColor()"></button>
+                <button class="font-color"><input type="color" class="text-font-color"
+                        oninput="changeFontColor()"></button>
             </div>
 
             <div class="stickers">
@@ -77,8 +92,8 @@
             </div>
 
             <div class="social">
-                <a href="#" onclick="downloadCanvas(this)">Download</a>
-                <button><img src="img/icons/facebook-logo.png"></button>
+                <a href="#" onclick="downloadCanvas(this)" class="download"></a>
+                <button class="facebook"></button>
             </div>
 
         </div>
