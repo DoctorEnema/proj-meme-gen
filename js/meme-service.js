@@ -11,35 +11,19 @@ var gImgs = [
     { id: 103, url: 'meme-imgs/3.jpg', keywords: ['Trump', 'Political', 'China'] },
     { id: 104, url: 'meme-imgs/4.jpg', keywords: ['Dog', 'Love'] },
     { id: 105, url: 'img/hank.png', keywords: ['Amogos', 'Happy', 'Sad', 'Advanced'] },
+    { id: 106, url: 'meme-imgs/5.jpg', keywords: ['Amogos', 'Happy', 'Sad', 'Advanced'] },
+    { id: 107, url: 'meme-imgs/6.jpg', keywords: ['Amogos', 'Happy', 'Sad', 'Advanced'] },
+    { id: 108, url: 'meme-imgs/7.jpg', keywords: ['Amogos', 'Happy', 'Sad', 'Advanced'] },
+    { id: 109, url: 'meme-imgs/8.jpg', keywords: ['Amogos', 'Happy', 'Sad', 'Advanced'] },
+    { id: 110, url: 'meme-imgs/9.jpg', keywords: ['Amogos', 'Happy', 'Sad', 'Advanced'] },
+    { id: 111, url: 'meme-imgs/10.jpg', keywords: ['Amogos', 'Happy', 'Sad', 'Advanced'] },
+    { id: 112, url: 'meme-imgs/11.jpg', keywords: ['Amogos', 'Happy', 'Sad', 'Advanced'] },
+    { id: 113, url: 'meme-imgs/12.jpg', keywords: ['Amogos', 'Happy', 'Sad', 'Advanced'] },
+    { id: 114, url: 'meme-imgs/13.jpg', keywords: ['Amogos', 'Happy', 'Sad', 'Advanced'] },
+    { id: 115, url: 'meme-imgs/14.jpg', keywords: ['Amogos', 'Happy', 'Sad', 'Advanced'] },
+    { id: 116, url: 'meme-imgs/15.jpg', keywords: ['Amogos', 'Happy', 'Sad', 'Advanced'] },
+    { id: 117, url: 'meme-imgs/16.jpg', keywords: ['Amogos', 'Happy', 'Sad', 'Advanced'] },
+    { id: 118, url: 'meme-imgs/17.jpg', keywords: ['Amogos', 'Happy', 'Sad', 'Advanced'] },
+    { id: 119, url: 'meme-imgs/18.jpg', keywords: ['Amogos', 'Happy', 'Sad', 'Advanced'] },
+    { id: 120, url: 'meme-imgs/19.jpg', keywords: ['Amogos', 'Happy', 'Sad', 'Advanced'] },
 ]
-
-function displayTags() {
-    var strHTML = ''
-    var tagIdx = 0
-    var elTags = document.querySelector('.search-tags')
-    var tagsValues = Object.values(gTags)
-    for (var tag in gTags) {
-        strHTML += `<div onclick="searchForTag(this)" class="tag tag${tagIdx}">${tag}</div>`
-        tagIdx++
-    }
-    elTags.innerHTML = strHTML
-    for (var i = 0; i < tagsValues.length; i++) {
-        document.querySelector(`.tag${i}`).style.fontSize = `${tagsValues[i] * 0.5}rem`
-        // Object.values(gTags)
-    }
-}
-
-function searchForTag(tag) {
-    var search = document.querySelector('input[name=SEARCH]')
-    search.value = tag.innerText
-    searchTags(search)
-    gTags[search.value]++
-    displayTags()
-}
-
-function clearSearch() {
-    var search = document.querySelector('input[name=SEARCH]')
-    search.value = ''
-    searchTags(search)
-}
-

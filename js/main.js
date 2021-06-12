@@ -1,6 +1,19 @@
 'use strict'
 
+var gMemesToDisplay
+var gFoundTags
 
+function init() {
+    gElCanvas = getCanvas()
+    gCtx = gElCanvas.getContext('2d')
+    gMemesToDisplay = gImgs
+    getImagesToDisplay()
+    gMemeReady = false
+    if (!gMyMemes || !gMyMemes.length) gMyMemes = []
+    else gMyMemes = loadFromStorage('myMemes')
+    displaySaved()
+    displayTags()
+}
 
 function displayPage(clicked) {
 
@@ -31,11 +44,33 @@ function displayPage(clicked) {
     }
 }
 
+function searchForTag(tag) {
+    var search = document.querySelector('input[name=SEARCH]')
+    search.value = tag.innerText
+    searchTags(search)
+    gTags[search.value]++
+    displayTags()
+}
 
-function renderGallery() {
+function clearSearch() {
+    var search = document.querySelector('input[name=SEARCH]')
+    search.value = ''
+    searchTags(search)
+}
+
+function displayTags() {
     var strHTML = ''
-    gImgs.forEach(img => strHTML += `<img src="${img.url}" id=img-${img.id} onclick="chooseImage(this)">`)
-    document.querySelector('.gallery').innerHTML = strHTML
+    var tagIdx = 0
+    var elTags = document.querySelector('.search-tags')
+    var tagsValues = Object.values(gTags)
+    for (var tag in gTags) {
+        strHTML += `<div onclick="searchForTag(this)" class="tag tag${tagIdx}">${tag}</div>`
+        tagIdx++
+    }
+    elTags.innerHTML = strHTML
+    for (var i = 0; i < tagsValues.length; i++) {
+        document.querySelector(`.tag${i}`).style.fontSize = `${tagsValues[i] * 0.5}rem`
+    }
 }
 
 function searchTags(elSearch) {
@@ -60,4 +95,13 @@ function getImagesToDisplay() {
     var strHTML = ''
     gMemesToDisplay.forEach(img => strHTML += `<img src="${img.url}" id=img-${img.id} onclick="chooseImage(this)">`)
     document.querySelector('.gallery').innerHTML = strHTML
+}
+
+function makeId(length = 5) {
+    var txt = '';
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (var i = 0; i < length; i++) {
+        txt += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return txt;
 }

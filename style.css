@@ -37,7 +37,21 @@ a {
 /* Nav */
 
 .main-nav {
-    background-color: #546bf3;
+    /* background-color: #546bf3; */
+    background: linear-gradient(225deg, rgba(117,67,241,1) 0%, rgba(84,107,243,1) 50%, rgba(109,109,199,1) 100%);     background-size: 500% 500%;
+    animation: gradient 20s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 nav {
