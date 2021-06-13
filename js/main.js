@@ -1,5 +1,8 @@
 'use strict'
 
+//What goes where? MVC is weird
+
+
 var gMemesToDisplay
 var gFoundTags
 
@@ -16,7 +19,7 @@ function init() {
 }
 
 function displayPage(clicked) {
-
+//is this ok? seems kinda long
     document.querySelectorAll('.navies').forEach((el) => el.classList.remove('active'))
     document.querySelectorAll('.navies').forEach((el) => el.style.backgroundPosition = 'center 5rem')
     clicked.classList.add('active')
@@ -63,6 +66,7 @@ function displayTags() {
     var tagIdx = 0
     var elTags = document.querySelector('.search-tags')
     var tagsValues = Object.values(gTags)
+    //is this a proper method to run through an object?for in gets the key, and the for loop gets the value
     for (var tag in gTags) {
         strHTML += `<div onclick="searchForTag(this)" class="tag tag${tagIdx}">${tag}</div>`
         tagIdx++
@@ -77,6 +81,7 @@ function searchTags(elSearch) {
     gFoundTags = []
     var search = elSearch.value.toLowerCase()
     gMemesToDisplay = []
+    //could i have used something other than a for loop? would double forEach be weird?
     for (var tag in gTags) {
         if (tag.toLowerCase().includes(search)) gFoundTags.push(tag);
     }

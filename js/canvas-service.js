@@ -41,10 +41,10 @@ function switchLines() {
     document.querySelectorAll('.meme-text').forEach((el) => el.classList.add('hide'))
     document.querySelector(`input[name=MEME-TEXT${gMeme.selectedLineIdx}]`).classList.remove('hide')
     drawText()
-    //fix bug that doesn't display top and bottom text on first switch
 }
 
 function addLine() {
+    //this one's kinda weird. is this a disgusting hack? how could i have made this better?
     var strHTML = ''
     var lastIdx = gMeme.lines.length
     var textPosition = gMeme.lines.length === 1 ? 'Bottom Text' : 'Middle Text'
@@ -83,6 +83,8 @@ function addLine() {
 
 function changeFontColor() {
     var currLine = gMeme.lines[gMeme.selectedLineIdx]
+    //these take the color and put it in the buttons, but also change the color of the font in the canvas. 
+    // Is this supposed to be somewhere else?
     var fontColor = document.querySelector('.text-font-color')
     var fontColorBtn = document.querySelector('.font-color')
     fontColorBtn.style.color = `${fontColor.value}`

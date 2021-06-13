@@ -25,5 +25,5 @@ var gImgs = [
     { id: 117, url: 'meme-imgs/16.jpg', keywords: ['Amogos', 'Happy', 'Sad', 'Advanced'] },
     { id: 118, url: 'meme-imgs/17.jpg', keywords: ['Amogos', 'Happy', 'Sad', 'Advanced'] },
     { id: 119, url: 'meme-imgs/18.jpg', keywords: ['Amogos', 'Happy', 'Sad', 'Advanced'] },
-    { id: 120, url: 'meme-imgs/19.jpg', keywords: ['Amogos', 'Happy', 'Sad', 'Advanced'] },
+    { id: 120, url: 'meme-imgs/19.jpg', keywords:['Amogos', 'Happy', 'Sad', 'Advanced'] },
 ]

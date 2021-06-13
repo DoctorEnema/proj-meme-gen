@@ -2,9 +2,9 @@
 
 var gMemeReady
 
-function drawImg(chosenImg) {
+function drawImg(imgUrl) {
     var img = new Image()
-    img.src = chosenImg
+    img.src = imgUrl
     img.onload = () => {
         gCtx.drawImage(gCurrImg, 0, 0, gElCanvas.width, gElCanvas.height)
         drawText()
@@ -20,6 +20,7 @@ function drawAllText() {
         gCtx.fillText(line.txt, line.posX, line.posY)
         gCtx.strokeText(line.txt, line.posX, line.posY)
     })
+    //I need this, but could I have put this somewhere else? it's sorta repeating drawText, but with some variations
 }
 
 function readyMeme() {
@@ -30,18 +31,18 @@ function readyMeme() {
 function drawRectRev(x, y) {
     if (gMemeReady) return
     var currLine = gMeme.lines[gMeme.selectedLineIdx]
-    var testing = gCtx.measureText(currLine.txt)
+    var textWidth = gCtx.measureText(currLine.txt)
     gCtx.beginPath()
-    gCtx.rect(x, y, testing.width * -1 - 15, gElCanvas.height / 8)
+    gCtx.rect(x, y, textWidth.width * -1 - 15, gElCanvas.height / 8)
     gCtx.strokeStyle = 'black'
     gCtx.stroke()
 }
 function drawRect(x, y) {
     if (gMemeReady) return
     var currLine = gMeme.lines[gMeme.selectedLineIdx]
-    var testing = gCtx.measureText(currLine.txt)
+    var textWidth = gCtx.measureText(currLine.txt)
     gCtx.beginPath()
-    gCtx.rect(x, y, testing.width + 15, gElCanvas.height / 8)
+    gCtx.rect(x, y, textWidth.width + 15, gElCanvas.height / 8)
     gCtx.strokeStyle = 'black'
     gCtx.stroke()
 }
@@ -85,7 +86,7 @@ function downloadCanvas(elLink) {
 function saveMeme() {
     gMyMemes.unshift(gElCanvas.toDataURL())
     saveToStorage('myMemes', gMyMemes)
-displaySaved()
+    displaySaved()
 }
 
 function displaySaved() {
